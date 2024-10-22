@@ -8,7 +8,6 @@ import {MusicComponent} from './music/music.component';
     MusicComponent
   ],
   template: '<app-music></app-music>',
-  // templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
