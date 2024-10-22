@@ -5,7 +5,7 @@ import {MusicService} from '../service/music.service';
 
 export interface Music {
   title: string;
-  author: string;
+  artist: string;
   userId: string;
 }
 
@@ -40,8 +40,8 @@ export class MusicComponent {
     );
   }
 
-  addMusic(title: string, author: string, userId: string): void {
-    const newMusic: Music = {title, author, userId};
+  addMusic(title: string, artist: string, userId: string): void {
+    const newMusic: Music = {title, artist, userId};
     this.musicService.addMusic(newMusic).subscribe(
       (music: Music) => {
         this.musics.push(music);
