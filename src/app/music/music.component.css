@@ -1,0 +1,80 @@
+/* Estilos gerais para a tela */
+.music-container {
+  width: 60%;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para o título */
+h1, h2 {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 1.8em;
+}
+
+/* Estilos para a lista de músicas */
+.music-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.music-list li {
+  padding: 10px 0;
+  font-size: 1.2em;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+}
+
+.music-title {
+  font-weight: bold;
+}
+
+.music-author {
+  color: #888;
+}
+
+/* Estilos para o formulário */
+.music-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field {
+  width: 60%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1.1em;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}

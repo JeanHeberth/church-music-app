@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForOf} from '@angular/common';
+import {MusicService} from '../service/music.service';
 
-interface Music {
+export interface Music {
   title: string;
   author: string;
+  userId: string;
 }
 
 @Component({
@@ -18,15 +20,35 @@ interface Music {
   standalone: true
 })
 export class MusicComponent {
-  musicList: Music[] = [];
-  title: string = '';
-  author: string = '';
+  musics: Music[] = [];
 
-  addMusic() {
-    if (this.title && this.author) {
-      this.musicList.push({title: this.title, author: this.author});
-      this.title = '';
-      this.author = '';
-    }
+  constructor(private musicService: MusicService) {
+  }
+
+  ngOnInit(): void {
+    this.loadMusics();
+  }
+
+  loadMusics(): void {
+    this.musicService.getAllMusic().subscribe(
+      (data: Music[]) => {
+        this.musics = data;
+      },
+      (error) => {
+        console.error('Erro ao carregar músicas:', error);
+      }
+    );
+  }
+
+  addMusic(title: string, author: string, userId: string): void {
+    const newMusic: Music = {title, author, userId};
+    this.musicService.addMusic(newMusic).subscribe(
+      (music: Music) => {
+        this.musics.push(music);
+      },
+      (error) => {
+        console.error('Erro ao adicionar música:', error);
+      }
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, importProvidersFrom} from '@angular/core';
 import {MusicComponent} from './music/music.component';
 
 @Component({
@@ -8,7 +8,7 @@ import {MusicComponent} from './music/music.component';
     MusicComponent
   ],
   template: '<app-music></app-music>',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'church-music-app';
