@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {MusicService} from '../service/music.service';
 
 export interface Music {
@@ -15,7 +15,8 @@ export interface Music {
   styleUrls: ['./music.component.css'],
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   standalone: true
 })
@@ -26,29 +27,45 @@ export class MusicComponent {
   }
 
   ngOnInit(): void {
-    this.loadMusics();
+    this.getMusics();
   }
 
-  loadMusics(): void {
-    this.musicService.getAllMusic().subscribe(
-      (data: Music[]) => {
-        this.musics = data;
-      },
-      (error) => {
-        console.error('Erro ao carregar músicas:', error);
-      }
-    );
+  getMusics(): void {
+    this.musicService.getMusics().subscribe((data: any) => {
+      this.musics = data;
+    });
   }
 
   addMusic(title: string, artist: string, userId: string): void {
-    const newMusic: Music = {title, artist, userId};
-    this.musicService.addMusic(newMusic).subscribe(
-      (music: Music) => {
-        this.musics.push(music);
-      },
-      (error) => {
-        console.error('Erro ao adicionar música:', error);
-      }
-    );
+    this.musicService.addMusic({title, artist, userId}).subscribe(() => {
+      this.getMusics();  // Atualizar a lista de músicas
+    });
+  }
+
+  editMusic(music: any): void {
+    const updatedTitle = prompt('Editar título:', music.title);
+    const updatedAuthor = prompt('Editar artista:', music.author);
+
+    if (updatedTitle && updatedAuthor) {
+      this.musicService.editMusic(music._id, {title: updatedTitle, author: updatedAuthor}).subscribe(() => {
+        alert('Música atualizada com sucesso!');
+        this.getMusics();
+      });
+    }
+  }
+
+  deleteMusic(music: any): void {
+    if (confirm('Tem certeza que deseja excluir esta música?')) {
+      this.musicService.deleteMusic(music._id).subscribe(() => {
+        alert('Música excluída com sucesso!');
+        this.getMusics();
+      });
+    }
+  }
+
+  canEditOrDelete(music: any): boolean {
+    // const currentUser = this.authService.getCurrentUser();
+    // return currentUser.roles.includes('ROLE_ADMIN') || music.userId === currentUser.id;
+    return true;
   }
 }

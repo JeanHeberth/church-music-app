@@ -7,12 +7,12 @@ import {Music} from '../music/music.component';
   providedIn: 'root'
 })
 export class MusicService {
-  private apiUrl = 'http://localhost:8088/api/music';
+  private apiUrl = 'http://localhost:8888/api/music';
 
   constructor(private http: HttpClient) {
   }
 
-  getAllMusic(): Observable<Music[]> {
+  getMusics(): Observable<Music[]> {
     return this.http.get<Music[]>(this.apiUrl);
   }
 
@@ -20,8 +20,12 @@ export class MusicService {
     return this.http.post<Music>(this.apiUrl, music);
   }
 
-  deleteMusic(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  editMusic(id: string, music: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, music);
+  }
+
+  deleteMusic(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
 }

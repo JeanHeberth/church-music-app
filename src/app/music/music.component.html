@@ -26,8 +26,20 @@
   <br/>
   <h3 class="text-center">Músicas Cadastradas</h3>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let music of musics">
-      {{ music.title }} - <em>{{ music.artist }} - {{ music.userId }}</em>
+    <li *ngFor="let music of musics" class="list-group-item d-flex justify-content-between align-items-center">
+      <span>
+        {{ music.title }} - {{ music.artist }} - {{ music.userId }}
+      </span>
+      <div>
+        <button class="btn btn-warning btn-sm me-2" (click)="editMusic(music)" *ngIf="canEditOrDelete(music)">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="deleteMusic(music)" *ngIf="canEditOrDelete(music)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
     </li>
   </ul>
 </div>
+
+
